@@ -9,12 +9,20 @@
 - backend
     - java/kotlin-сервис
  
-## Установка клаcсоного минибанка
+## Установка клаccного минибанка
+
+На данный момент для проверки локальной работы необходимо в терминале запустить исполняемый jar
+файл командой из терминала: java -jar gluharyov-telegram-bot-0.0.1-SNAPSHOT.jar
+
+- файл находится по адресу:
+  - build/libs/gluharyov-telegram-bot-0.0.1-SNAPSHOT.jar
 
 [Для установки жми](https://www.example.com)
 
+
 ## Схема работы классного минибанка
 
+```plantuml
 @startuml
 
 actor "User" as front
