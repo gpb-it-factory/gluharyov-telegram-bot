@@ -36,7 +36,7 @@ public class NiceTeleBot extends TelegramLongPollingBot {
             SendMessage sendMessage = answerService.messageReceiver(update);
             execute(sendMessage);
         } catch (TelegramApiException e) {
-            log.error("При ответе возникла проблема");
+            log.error(e.getMessage());
         }
     }
 }
