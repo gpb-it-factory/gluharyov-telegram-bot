@@ -1,0 +1,9 @@
+spring:
+  config:
+    import: env.yml
+bot:
+  name: ${BOT_NAME}
+
+  token: ${BOT_TOKEN}
+
+
