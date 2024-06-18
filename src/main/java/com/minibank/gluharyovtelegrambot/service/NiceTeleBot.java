@@ -15,7 +15,8 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 public class NiceTeleBot extends TelegramLongPollingBot {
 
     private final BotProperties botProperties;
-    private final AnswerService answerService;
+    private final CommandRoutingService commandRoutingService;
+
     @Override
     public String getBotUsername() {
 
@@ -33,7 +34,7 @@ public class NiceTeleBot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
 
         try {
-            SendMessage sendMessage = answerService.messageReceiver(update);
+            SendMessage sendMessage = commandRoutingService.messageReceiver(update);
             execute(sendMessage);
         } catch (TelegramApiException e) {
             log.error(e.getMessage());
