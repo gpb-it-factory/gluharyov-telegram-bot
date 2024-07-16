@@ -2,13 +2,14 @@ package com.minibank.gluharyovtelegrambot.feignclient;
 
 import com.minibank.gluharyovtelegrambot.config.properties.RegisterAccountRequest;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.UUID;
 
-@FeignClient(name = "register-service", url = "http://localhost:8080", path = "/users")
+@FeignClient(name = "${feign.name}", url = "${feign.url}", path = "${feign.path}")
 public interface RegisterFeignClient {
 
     @PostMapping()
-    UUID register(RegisterAccountRequest registerAccountRequest);
+    ResponseEntity<HttpStatus> register(RegisterAccountRequest registerAccountRequest);
 }

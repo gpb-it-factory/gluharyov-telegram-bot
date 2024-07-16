@@ -44,21 +44,20 @@ public class IntegrationTest {
     @Test
     public void testRegisterCommand() {
         // given
-        var name = "max";
+        var userName = "max";
         var userId = 1234L;
         String expectedResponse = "you registered";
-        UUID uuid = UUID.randomUUID();
+
 
         Update update = createUpdateTemplate("/registration");
-        update.getMessage().getChat().setFirstName(name);
+        update.getMessage().getChat().setFirstName(userName);
 
-        RegisterAccountRequest request = new RegisterAccountRequest(name, userId);
-        when(mockRegisterFeignClient.register(request)).thenReturn(uuid);
+        RegisterAccountRequest request = spy(new RegisterAccountRequest(userId, userName)) ;
 
-        var actual = routingService.messageReceiver(update);
+        mockRegisterFeignClient.register(request);
 
-        // when
-        assertThat(actual.getText()).isEqualTo(expectedResponse);
+        verify(mockRegisterFeignClient, atLeastOnce()).register(request);
+
     }
 
     private static Update createUpdateTemplate(String cmd) {

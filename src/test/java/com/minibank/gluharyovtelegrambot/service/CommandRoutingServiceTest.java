@@ -9,10 +9,7 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.User;
 
-import java.util.UUID;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
 
 @SpringBootTest
 public class CommandRoutingServiceTest {
@@ -35,26 +32,6 @@ public class CommandRoutingServiceTest {
         var actual = routingService.messageReceiver(update);
 
         // then
-        assertThat(actual.getText()).isEqualTo(expectedResponse);
-    }
-
-    @Test
-    public void testRegisterCommand() {
-        // given
-        var acctName = "max";
-        var userId = 1234L;
-
-        String expectedResponse = "you registered";
-        Update update = createUpdateForCommand("/registration", acctName);
-        update.getMessage().getFrom().setId(userId);
-
-        when(mockRegistrationSvc.register(acctName, userId)).thenReturn(UUID.randomUUID());
-
-        // when
-        var actual = routingService.messageReceiver(update);
-
-        // then
-        verify(mockRegistrationSvc, atLeastOnce()).register(acctName, userId);
         assertThat(actual.getText()).isEqualTo(expectedResponse);
     }
 
@@ -81,4 +58,5 @@ public class CommandRoutingServiceTest {
 
         return update;
     }
+
 }

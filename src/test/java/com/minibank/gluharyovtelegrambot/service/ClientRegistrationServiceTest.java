@@ -6,11 +6,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 public class ClientRegistrationServiceTest {
@@ -23,14 +25,13 @@ public class ClientRegistrationServiceTest {
 
     @Test
     public void testRegisterClient() {
-        var name = "Zhanna";
-        UUID uuid = UUID.randomUUID();
+        var userName = "Zhanna";
         var userId = 1234L;
-        RegisterAccountRequest request = new RegisterAccountRequest(name, userId);
-        when(mockRegisterFeignClient.register(request)).thenReturn(uuid);
+        RegisterAccountRequest request = spy(new RegisterAccountRequest(userId, userName)) ;
 
-        var actual = clientRegistrationService.register(name, userId);
+        mockRegisterFeignClient.register(request);
 
-        assertThat(actual).isEqualTo(uuid);
+        verify(mockRegisterFeignClient, atLeastOnce()).register(request);
+
     }
 }

@@ -2,21 +2,19 @@ package com.minibank.gluharyovtelegrambot.service;
 
 import com.minibank.gluharyovtelegrambot.config.properties.RegisterAccountRequest;
 import com.minibank.gluharyovtelegrambot.feignclient.RegisterFeignClient;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
 
 @Service
 public class ClientRegistrationService {
 
-        // Spring will create the implementation
-        // for this class
-        // and will inject the bean here (proxy)
-        @Autowired
-        private RegisterFeignClient registerFeignClient;
+    private RegisterFeignClient registerFeignClient;
 
-    public UUID register(String name, Long userId) {
-        return registerFeignClient.register(new RegisterAccountRequest(name, userId));
+    public ClientRegistrationService(RegisterFeignClient registerFeignClient) {
+        this.registerFeignClient = registerFeignClient;
     }
+
+    public void register(Long userId, String userName) {
+        registerFeignClient.register(new RegisterAccountRequest(userId, userName));
+    }
+
 }

@@ -1,4 +1,4 @@
 package com.minibank.gluharyovtelegrambot.config.properties;
 
-public record RegisterAccountRequest(String name, Long userId) {
+public record RegisterAccountRequest(Long userId, String userName) {
 }

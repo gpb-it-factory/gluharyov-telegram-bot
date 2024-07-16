@@ -42,30 +42,4 @@ class NiceTeleBotTest {
         assertThat(actual).isEqualTo(token);
     }
 
-        /*
-         * 1. Integration test: set up context. G: Junit Spring
-         * 2. Test setup:
-         * - create mock for feign client (mockito)
-         * - add mock to ctx
-         * - configure mock: when register("abc") then return UUID.generate()
-         * 3. Inject bot into test, call update method with register payload.
-         * 4. Check return value to match
-         */
-
-
-        // given
-
-        // setup mocks
-        // expected acctName
-        // expected UUID
-
-
-        // when
-
-        // call register with expected acctName
-
-
-        // then
-
-        // check result against expected UUID (AssertJ: assertThat())
 }
